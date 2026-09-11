@@ -1,0 +1,20 @@
+[
+  {
+    "title": "2026 NEW MODEL SPEED PRO ARRIVED.",
+    "subtitle": "圧倒的な軽量性と足馴染み。ピッチ上のすべての動きを加速させる最新モデル。",
+    "btnText": "新作スパイクをチェック",
+    "bg": "linear-gradient(135deg, #1b2a4a 0%, #0d1526 100%)"
+  },
+  {
+    "title": "SUMMER SALE UP TO 50% OFF",
+    "subtitle": "部活生応援！人気ブランドのトレーニングウェア＆スパイクが期間限定プライスダウン。",
+    "btnText": "セール会場はこちら",
+    "bg": "linear-gradient(135deg, #e60012 0%, #80000a 100%)"
+  },
+  {
+    "title": "TEAM ORDER SIMULATOR",
+    "subtitle": "自分たちのカラーを着ろ。Web上で簡単にデザイン作成＆概算見積もりが可能。",
+    "btnText": "チームウェアを作成する",
+    "bg": "linear-gradient(135deg, #111 0%, #333 100%)"
+  }
+]

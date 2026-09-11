@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FOOTBALL standard - PC版トップページ</title>
+  <style>
+    /* 全体設定 */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background-color: #f4f6f8;
+      color: #333;
+            min-width: 1024px;
+      max-width: 1920px;
+
+    }
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* 共通コンテナ（PC最大幅: 1200px 中央寄せ） */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* 1. トップアナウンスバー */
+    .announcement-bar {
+      background-color: #1b2a4a;
+      color: #fff;
+      font-size: 13px;
+      padding: 8px 0;
+      text-align: center;
+      font-weight: bold;
+    }
+
+    /* 2. PCヘッダー (高さ: 80px固定) */
+    .header {
+      background-color: #fff;
+      border-bottom: 1px solid #e5e5e5;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    .header-inner {
+      height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .header-logo {
+      font-size: 24px;
+      font-weight: 900;
+      color: #1b2a4a;
+      font-style: italic;
+      letter-spacing: 1px;
+    }
+    /* PC用広幅検索バー */
+    .search-box {
+      flex: 0 1 450px;
+      display: flex;
+      height: 42px;
+      border: 2px solid #1b2a4a;
+      border-radius: 21px;
+      overflow: hidden;
+    }
+    .search-box input {
+      flex: 1;
+      border: none;
+      padding: 0 16px;
+      font-size: 14px;
+      outline: none;
+    }
+    .search-box button {
+      width: 80px;
+      background-color: #1b2a4a;
+      color: #fff;
+      border: none;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .header-utility {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+    }
+    .utility-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-size: 12px;
+      color: #1b2a4a;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    /* PCグローバルナビゲーション (GNAV) */
+    .gnav {
+      background-color: #fff;
+      border-bottom: 1px solid #eee;
+    }
+    .gnav-list {
+      display: flex;
+      justify-content: space-between;
+      list-style: none;
+      height: 48px;
+      align-items: center;
+    }
+    .gnav-item a {
+      font-size: 14px;
+      font-weight: bold;
+      color: #1b2a4a;
+      padding: 12px 16px;
+      transition: color 0.2s;
+    }
+    .gnav-item a:hover {
+      color: #ccff00;
+      background-color: #1b2a4a;
+      border-radius: 4px;
+    }
+
+    /* 3. ヒーローエリア (アスペクト比 21:9 / PC用横長バナー) */
+    .hero {
+      width: 100%;
+      height: 420px;
+      background: linear-gradient(135deg, #1b2a4a 0%, #0d1526 100%);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      position: relative;
+      margin-bottom: 30px;
+    }
+    .hero-content {
+      max-width: 500px;
+    }
+    .hero-content h1 {
+      font-size: 38px;
+      line-height: 1.2;
+      margin-bottom: 12px;
+      font-weight: 900;
+    }
+    .hero-content p {
+      font-size: 16px;
+      margin-bottom: 24px;
+      color: #d0d8e8;
+    }
+    .hero-btn {
+      display: inline-block;
+      background-color: #ccff00;
+      color: #1b2a4a;
+      font-weight: bold;
+      font-size: 15px;
+      padding: 14px 32px;
+      border-radius: 30px;
+      box-shadow: 0 4px 12px rgba(204, 255, 0, 0.3);
+      transition: transform 0.2s;
+    }
+    .hero-btn:hover {
+      transform: translateY(-2px);
+    }
+
+    /* 4. グラフィカルカテゴリナビ (グリッド配置) */
+    .category-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 16px;
+      margin-bottom: 40px;
+    }
+    .cat-card {
+      background-color: #fff;
+      border-radius: 8px;
+      padding: 16px;
+      text-align: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      transition: transform 0.2s;
+      cursor: pointer;
+    }
+    .cat-card:hover {
+      transform: translateY(-4px);
+    }
+    .cat-icon {
+      width: 50px;
+      height: 50px;
+      background-color: #eef2f5;
+      border-radius: 50%;
+      margin: 0 auto 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      color: #1b2a4a;
+      font-size: 12px;
+    }
+    .cat-name {
+      font-size: 13px;
+      font-weight: bold;
+    }
+
+    /* 共通セクション */
+    .section {
+      margin-bottom: 50px;
+    }
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 20px;
+      border-bottom: 2px solid #1b2a4a;
+      padding-bottom: 8px;
+    }
+    .section-title {
+      font-size: 22px;
+      font-weight: 900;
+      color: #1b2a4a;
+    }
+    .more-link {
+      font-size: 13px;
+      color: #666;
+      font-weight: bold;
+    }
+
+    /* 5. PC版 4列商品グリッド (NEW ARRIVALS) */
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+    .product-card {
+      background-color: #fff;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      display: flex;
+      flex-direction: column;
+      transition: box-shadow 0.2s;
+    }
+    .product-card:hover {
+      box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+    }
+    .product-img {
+      width: 100%;
+      height: 200px;
+      background-color: #f9f9f9;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #aaa;
+      font-size: 14px;
+    }
+    .product-info {
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+    .tag {
+      display: inline-block;
+      font-size: 10px;
+      background-color: #1b2a4a;
+      color: #fff;
+      padding: 2px 6px;
+      border-radius: 3px;
+      margin-bottom: 8px;
+      align-self: flex-start;
+    }
+    .product-title {
+      font-size: 14px;
+      font-weight: bold;
+      line-height: 1.4;
+      margin-bottom: 12px;
+      flex: 1;
+    }
+    .product-price {
+      font-size: 16px;
+      color: #e60012;
+      font-weight: bold;
+    }
+
+    /* PCフッター (4列構造) */
+    .footer {
+      background-color: #1b2a4a;
+      color: #fff;
+      padding: 50px 0 20px;
+      margin-top: 60px;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 40px;
+      margin-bottom: 40px;
+    }
+    .footer-col h4 {
+      font-size: 15px;
+      margin-bottom: 16px;
+      color: #ccff00;
+    }
+    .footer-col ul {
+      list-style: none;
+    }
+    .footer-col li {
+      margin-bottom: 10px;
+      font-size: 13px;
+      color: #ccc;
+    }
+    .copyright {
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding-top: 20px;
+      text-align: center;
+      font-size: 12px;
+      color: #888;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 1. トップアナウンスバー -->
+  <div class="announcement-bar">
+    【全国一律送料無料】15,000円以上のお買い上げで送料無料 | 15時までのご注文で即日発送
+  </div>
+
+  <!-- 2. PCヘッダー -->
+  <header class="header">
+    <div class="container header-inner">
+      <div class="header-logo">FOOTBALL standard</div>
+      
+      <!-- ワイド検索バー -->
+      <div class="search-box">
+        <input type="text" placeholder="商品名、ブランド、HG/AGなどのグラウンド種別から探す">
+        <button>検索</button>
+      </div>
+
+      <!-- 右側ユーティリティ -->
+      <div class="header-utility">
+        <div class="utility-item">マイページ</div>
+        <div class="utility-item">お気に入り</div>
+        <div class="utility-item">カート (0)</div>
+      </div>
+    </div>
+
+    <!-- グローバルナビゲーション -->
+    <nav class="gnav">
+      <div class="container">
+        <ul class="gnav-list">
+          <li class="gnav-item"><a href="#">スパイク</a></li>
+          <li class="gnav-item"><a href="#">トレーニングシューズ</a></li>
+          <li class="gnav-item"><a href="#">ウェア・ジャージ</a></li>
+          <li class="gnav-item"><a href="#">GK用品</a></li>
+          <li class="gnav-item"><a href="#">ボール・アクセサリ</a></li>
+          <li class="gnav-item"><a href="#">チームオーダー</a></li>
+          <li class="gnav-item"><a href="#" style="color:#e60012;">SALE</a></li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+
+  <!-- 3. ヒーローエリア -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <h1>2026 NEW MODEL<br>SPEED PRO ARRIVED.</h1>
+        <p>圧倒的な軽量性と足馴染み。ピッチ上のすべての動きを加速させる最新フラッグシップモデル登場。</p>
+        <a href="#" class="hero-btn">新作スパイクをチェック</a>
+      </div>
+    </div>
+  </section>
+
+  <main class="container">
+    <!-- 4. グラフィカルカテゴリナビ (6列) -->
+    <div class="category-grid">
+      <div class="cat-card">
+        <div class="cat-icon">HG</div>
+        <div class="cat-name">土グラウンド</div>
+      </div>
+      <div class="cat-card">
+        <div class="cat-icon">AG</div>
+        <div class="cat-name">人工芝</div>
+      </div>
+      <div class="cat-card">
+        <div class="cat-icon">FG</div>
+        <div class="cat-name">天然芝</div>
+      </div>
+      <div class="cat-card">
+        <div class="cat-icon">ウェア</div>
+        <div class="cat-name">最新ウェア</div>
+      </div>
+      <div class="cat-card">
+        <div class="cat-icon">店舗</div>
+        <div class="cat-name">実店舗在庫</div>
+      </div>
+      <div class="cat-card">
+        <div class="cat-icon">チーム</div>
+        <div class="cat-name">チーム注文</div>
+      </div>
+    </div>
+
+    <!-- 5. 新着商品セクション (4列表示) -->
+    <section class="section">
+      <div class="section-header">
+        <h2 class="section-title">NEW ARRIVALS</h2>
+        <a href="#" class="more-link">すべての新着商品を見る ＞</a>
+      </div>
+      
+      <div class="product-grid">
+        <div class="product-card">
+          <div class="product-img">スパイク画像</div>
+          <div class="product-info">
+            <span class="tag">HG / AG 対応</span>
+            <div class="product-title">スピードプロ 2026 Elite</div>
+            <div class="product-price">¥18,480 (税込)</div>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="product-img">スパイク画像</div>
+          <div class="product-info">
+            <span class="tag">AG 専用</span>
+            <div class="product-title">コントロール エリート Pro</div>
+            <div class="product-price">¥21,000 (税込)</div>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="product-img">ウェア画像</div>
+          <div class="product-info">
+            <span class="tag">新作</span>
+            <div class="product-title">プロパフォーマンス プラクティスシャツ</div>
+            <div class="product-price">¥4,950 (税込)</div>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="product-img">GKグローブ画像</div>
+          <div class="product-info">
+            <span class="tag">限定モデル</span>
+            <div class="product-title">グリップマスター GKグローブ v2</div>
+            <div class="product-price">¥11,800 (税込)</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- フッター -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <h3 style="font-size: 20px; font-style: italic; margin-bottom: 12px;">FOOTBALL standard</h3>
+          <p style="font-size: 12px; color: #aaa; line-height: 1.6;">
+            競技者のパフォーマンスを最大化するサッカー＆フットサル専門店。<br>
+            実店舗とオンラインストアで最新ギアと専門的なサービスをお届けします。
+          </p>
+        </div>
+        <div class="footer-col">
+          <h4>ショッピングガイド</h4>
+          <ul>
+            <li>お支払い方法について</li>
+            <li>配送・送料について</li>
+            <li>返品・サイズ交換について</li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>カテゴリー</h4>
+          <ul>
+            <li>サッカースパイク</li>
+            <li>トレーニングシューズ</li>
+            <li>サッカーウェア</li>
+            <li>GK用品</li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>店舗・サービス</h4>
+          <ul>
+            <li>実店舗アクセス・案内</li>
+            <li>足型計測・フィッティング</li>
+            <li>チームオーダー作成</li>
+          </ul>
+        </div>
+      </div>
+      <div class="copyright">
+        &copy; FOOTBALL standard All Rights Reserved.
+      </div>
+    </div>
+  </footer>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+
+    /* ===================================================
+       1. ヒーローエリア スライダー（自動＆ドット切り替え）
+       =================================================== */
+    const heroSection = document.querySelector('.hero');
+    const dots = document.querySelectorAll('.hero-dots .dot');
+    
+    // スライドデータ（画像切り替え用サンプル）
+    const slides = 
+      {
+        title: "2026 NEW MODEL SPEED PRO ARRIVED.",
+        subtitle: "圧倒的な軽量性と足馴染み。ピッチ上のすべての動きを加速させる最新モデル。",
+        btnText: "新作スパイクをチェック",
+        bg: "linear-gradient(135deg, #1b2a4a 0%, #0d1526 100%)"
+      }
+console.log(slides);
+console.log(slides["title"]);
+
+    let currentSlide = 0;
+    let slideInterval;
+
+    function updateSlide(index) {
+      if (!heroSection || slides.length === 0) return;
+      const data = slides[index];
+      
+      // 背景とテキストの更新
+      heroSection.style.background = data.bg;
+      const h1 = heroSection.querySelector('h1, h2');
+      const p = heroSection.querySelector('p');
+      const btn = heroSection.querySelector('.hero-btn');
+
+      if (h1) h1.textContent = data.title;
+      if (p) p.textContent = data.subtitle;
+      if (btn) btn.textContent = data.btnText;
+
+      // ドット（インジケーター）の更新
+      dots.forEach((dot, i) => {
+        dot.classList.toggle('active', i === index);
+      });
+
+      currentSlide = index;
+    }
+
+    // 自動再生（4秒ごと）
+    function startAutoSlide() {
+      slideInterval = setInterval(() => {
+        let nextIndex = (currentSlide + 1) % slides.length;
+        updateSlide(nextIndex);
+      }, 4000);
+    }
+
+    function stopAutoSlide() {
+      clearInterval(slideInterval);
+    }
+
+    // ドットクリックイベント
+    dots.forEach((dot, i) => {
+      dot.addEventListener('click', () => {
+        stopAutoSlide();
+        updateSlide(i);
+        startAutoSlide();
+      });
+    });
+
+    // マウスホバーで自動再生一時停止
+    if (heroSection) {
+      heroSection.addEventListener('mouseenter', stopAutoSlide);
+      heroSection.addEventListener('mouseleave', startAutoSlide);
+    }
+
+    startAutoSlide();
+
+
+    /* ===================================================
+       2. スクロールに応じたヘッダーのアニメーション
+       =================================================== */
+    const header = document.querySelector('.header');
+    
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        header.style.boxShadow = '0 4px 12px rgba(0,0,0,0.1)';
+        header.style.transition = 'all 0.3s ease';
+      } else {
+        header.style.boxShadow = 'none';
+      }
+    });
+
+
+    /* ===================================================
+       3. スマホ用 フッターアコーディオンメニュー
+       =================================================== */
+    const footerItems = document.querySelectorAll('.footer-item');
+
+    footerItems.forEach(item => {
+      item.addEventListener('click', () => {
+        // 次の要素（サブメニュー）を取得または開閉制御
+        const icon = item.querySelector('span');
+        if (icon) {
+          if (icon.textContent === '＋') {
+            icon.textContent = '－';
+            item.style.color = '#ccff00';
+          } else {
+            icon.textContent = '＋';
+            item.style.color = '#fff';
+          }
+        }
+      });
+    });
+
+
+    /* ===================================================
+       4. 検索機能のインタラクション（Enterキー / ボタン）
+       =================================================== */
+    const searchInput = document.querySelector('.search-box input');
+    const searchBtn = document.querySelector('.search-box button');
+
+    function executeSearch() {
+      if (!searchInput) return;
+      const query = searchInput.value.trim();
+      if (query) {
+        alert(`「${query}」の検索結果ページへ遷移します（実装例）`);
+        // 実際の実装時は以下のように遷移させます:
+        // window.location.href = `/search?q=${encodeURIComponent(query)}`;
+      } else {
+        alert('検索キーワードを入力してください。');
+      }
+    }
+
+    if (searchBtn) {
+      searchBtn.addEventListener('click', executeSearch);
+    }
+    if (searchInput) {
+      searchInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+          executeSearch();
+        }
+      });
+    }
+
+  });
+</script>
+</body>
+</html>
