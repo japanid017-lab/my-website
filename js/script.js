@@ -152,3 +152,89 @@
 
   });
 
+// 20260912検索アイコン
+document.addEventListener('DOMContentLoaded', () => {
+
+  // 各要素の取得
+  const searchModal = document.getElementById('search-modal');
+  const searchInput = document.getElementById('modal-search-input');
+  const closeBtn = document.getElementById('close-search-btn');
+  const clearBtn = document.getElementById('clear-search-btn');
+  const keywordTags = document.querySelectorAll('.tag-item');
+
+  // ヘッダーやボトムナビ内の検索ボタン（クリック対象）を取得
+  const searchTriggers = document.querySelectorAll('.icon-btn, .bottom-nav-item');
+
+  // 1. モーダルを開く処理
+  function openSearchModal() {
+    searchModal.classList.add('active');
+    // 開いた瞬間にテキスト入力エリアへフォーカスさせてキーボードを自動起動
+    setTimeout(() => {
+      searchInput.focus();
+    }, 100);
+  }
+
+  // 2. モーダルを閉じる処理
+  function closeSearchModal() {
+    searchModal.classList.remove('active');
+    searchInput.value = '';
+    clearBtn.style.display = 'none';
+  }
+
+  // 検索アイコンクリック時の判定処理
+  searchTriggers.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const text = btn.textContent.trim();
+      // ボタンテキストが「検索」を含む場合にモーダル起動
+      if (text.includes('検索')) {
+        e.preventDefault();
+        openSearchModal();
+      }
+    });
+  });
+
+  // 3. キャンセルボタンでモーダルを閉じる
+  closeBtn.addEventListener('click', closeSearchModal);
+
+  // 4. 入力中のクリア（×）ボタン表示制御
+  searchInput.addEventListener('input', () => {
+    if (searchInput.value.length > 0) {
+      clearBtn.style.display = 'block';
+    } else {
+      clearBtn.style.display = 'none';
+    }
+  });
+
+  clearBtn.addEventListener('click', () => {
+    searchInput.value = '';
+    clearBtn.style.display = 'none';
+    searchInput.focus();
+  });
+
+  // 5. Enterキー押下で検索実行（ページ遷移処理など）
+  searchInput.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+      const query = searchInput.value.trim();
+      if (query) {
+        // 実際の遷移処理例
+        alert(`「${query}」の検索一覧ページへ遷移します`);
+        // window.location.href = `/search?keyword=${encodeURIComponent(query)}`;
+        closeSearchModal();
+      }
+    }
+  });
+
+  // 6. おすすめキーワードタグのタップ入力処理
+  keywordTags.forEach(tag => {
+    tag.addEventListener('click', () => {
+      const keyword = tag.textContent;
+      searchInput.value = keyword;
+      clearBtn.style.display = 'block';
+      // タグ選択後にそのまま検索を実行
+      alert(`「${keyword}」で検索します`);
+      // window.location.href = `/search?keyword=${encodeURIComponent(keyword)}`;
+      closeSearchModal();
+    });
+  });
+
+});

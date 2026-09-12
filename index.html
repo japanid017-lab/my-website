@@ -127,5 +127,29 @@
       マイページ
     </div>
   </nav>
-</body>
+  <!-- 20260912追加　検索アイコン -->
+<!-- 検索全画面モーダル -->
+<div id="search-modal" class="search-modal">
+  <div class="search-modal-content">
+    <div class="search-header">
+      <div class="search-input-wrapper">
+        <input type="text" id="modal-search-input" placeholder="スパイク、ウェア、HG/AGなどから探す..." autocomplete="off">
+        <button id="clear-search-btn" class="clear-btn">&times;</button>
+      </div>
+      <button id="close-search-btn" class="close-btn">キャンセル</button>
+    </div>
+
+    <!-- よく検索されているキーワード（クイック検索） -->
+    <div class="search-suggestions">
+      <p class="suggestion-title">人気の検索キーワード</p>
+      <div class="keyword-tags">
+        <span class="tag-item">HG スパイク</span>
+        <span class="tag-item">AG 人工芝</span>
+        <span class="tag-item">ナイキ</span>
+        <span class="tag-item">部活生応援</span>
+        <span class="tag-item">GKグローブ</span>
+      </div>
+    </div>
+  </div>
+</div></body>
 </html>
