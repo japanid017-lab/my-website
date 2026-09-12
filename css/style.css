@@ -1,276 +1,341 @@
     /* 全体設定 */
     * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
     }
+
     body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      background-color: #f4f6f8;
-      color: #333;
-      padding-bottom: 70px; /* ボトムナビの高さ分の余白（必須） */
-      max-width: 430px; /* スマホ画面幅の上限固定 */
-      margin-left: auto;
-      margin-right: auto;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        background-color: #f4f6f8;
+        color: #333;
+        padding-bottom: 70px;
+        /* ボトムナビの高さ分の余白（必須） */
+        max-width: 430px;
+        /* スマホ画面幅の上限固定 */
+        margin-left: auto;
+        margin-right: auto;
     }
+
     a {
-      text-decoration: none;
-      color: inherit;
+        text-decoration: none;
+        color: inherit;
     }
 
     /* 1. アナウンスバー (高さ:約30px) */
     .announcement-bar {
-      height: 30px;
-      background-color: #1b2a4a;
-      color: #fff;
-      font-size: 11px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: bold;
+        height: 30px;
+        background-color: #1b2a4a;
+        color: #fff;
+        font-size: 11px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
     }
 
     /* 2. ヘッダー (高さ:60px・固定追従) */
     .header {
-      height: 60px;
-      background-color: #fff;
-      border-bottom: 1px solid #eee;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 16px;
-      position: sticky;
-      top: 0;
-      z-index: 100;
+        height: 60px;
+        background-color: #fff;
+        border-bottom: 1px solid #eee;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 16px;
+        position: sticky;
+        top: 0;
+        z-index: 100;
     }
+
     .header-logo {
-      font-weight: 900;
-      font-size: 16px;
-      color: #1b2a4a;
-      font-style: italic;
+        font-weight: 900;
+        font-size: 16px;
+        color: #1b2a4a;
+        font-style: italic;
     }
+
     .header-icons {
-      display: flex;
-      gap: 12px;
+        display: flex;
+        gap: 12px;
     }
+
     /* タップ領域44px以上を確保するボタン */
     .icon-btn {
-      width: 44px;
-      height: 44px;
-      background-color: #f0f0f0;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 12px;
-      border: none;
-      cursor: pointer;
+        width: 44px;
+        height: 44px;
+        background-color: #f0f0f0;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 12px;
+        border: none;
+        cursor: pointer;
     }
 
     /* 3. ヒーローエリア (アスペクト比 16:9 / 高さ:約220px) */
     .hero {
-      width: 100%;
-      aspect-ratio: 16 / 9;
-      background-color: #1b2a4a;
-      color: #fff;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      text-align: center;
-      padding: 16px;
+        width: 100%;
+        aspect-ratio: 16 / 9;
+        background-color: #1b2a4a;
+        color: #fff;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        text-align: center;
+        padding: 16px;
     }
+
     .hero h2 {
-      font-size: 20px;
-      margin-bottom: 8px;
+        font-size: 20px;
+        margin-bottom: 8px;
     }
+
     .hero-btn {
-      background-color: #ccff00;
-      color: #1b2a4a;
-      font-weight: bold;
-      padding: 10px 20px;
-      border-radius: 20px;
-      font-size: 13px;
-      min-height: 44px;
-      display: inline-flex;
-      align-items: center;
+        background-color: #ccff00;
+        color: #1b2a4a;
+        font-weight: bold;
+        padding: 10px 20px;
+        border-radius: 20px;
+        font-size: 13px;
+        min-height: 44px;
+        display: inline-flex;
+        align-items: center;
     }
+
     /* インジケーター（ドット） */
     .hero-dots {
-      position: absolute;
-      bottom: 8px;
-      display: flex;
-      gap: 6px;
+        position: absolute;
+        bottom: 8px;
+        display: flex;
+        gap: 6px;
     }
+
     .dot {
-      width: 8px;
-      height: 8px;
-      background-color: rgba(255,255,255,0.5);
-      border-radius: 50%;
+        width: 8px;
+        height: 8px;
+        background-color: rgba(255, 255, 255, 0.5);
+        border-radius: 50%;
     }
+
     .dot.active {
-      background-color: #ccff00;
+        background-color: #ccff00;
     }
 
     /* 共通セクションスタイル */
     .section {
-      padding: 16px;
-      background-color: #fff;
-      margin-top: 8px;
+        padding: 16px;
+        background-color: #fff;
+        margin-top: 8px;
     }
+
     .section-title {
-      font-size: 16px;
-      font-weight: bold;
-      margin-bottom: 12px;
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
+        font-size: 16px;
+        font-weight: bold;
+        margin-bottom: 12px;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
     }
+
     .section-title span {
-      font-size: 12px;
-      color: #666;
+        font-size: 12px;
+        color: #666;
     }
 
     /* 4. グラフィカルナビ (横スクロール / 高さ:約90px) */
     .quick-nav {
-      display: flex;
-      gap: 12px;
-      overflow-x: auto;
-      padding-bottom: 8px;
-      scrollbar-width: none; /* スクロールバー非表示 */
+        display: flex;
+        gap: 12px;
+        overflow-x: auto;
+        padding-bottom: 8px;
+        scrollbar-width: none;
+        /* スクロールバー非表示 */
     }
+
     .nav-item {
-      flex: 0 0 70px;
-      text-align: center;
+        flex: 0 0 70px;
+        text-align: center;
     }
+
     .nav-icon {
-      width: 60px;
-      height: 60px;
-      background-color: #eef2f5;
-      border-radius: 50%;
-      margin: 0 auto 6px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 11px;
-      font-weight: bold;
-      color: #1b2a4a;
+        width: 60px;
+        height: 60px;
+        background-color: #eef2f5;
+        border-radius: 50%;
+        margin: 0 auto 6px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 11px;
+        font-weight: bold;
+        color: #1b2a4a;
     }
+
+    /* 追記 .nav-icon1-5 20260911 ※165行は文字の縁取りを試したが不採用とした*/
+    .nav-icon span {
+        background-color: rgba(255, 255, 255, 0.75);
+        width: 100%;
+    }
+
+    .nav-icon1 {
+        background-image: url("../images/nav-icon1.jpg");
+        background-size: cover;
+        color: #1b2a4a;
+        /* -webkit-text-stroke:0.5px #000000; */
+    }
+
+    .nav-icon2 {
+        background-image: url("../images/nav-icon2.jpg");
+        background-size: cover;
+        color: #1b2a4a;
+    }
+
+    .nav-icon3 {
+        background-image: url("../images/nav-icon3.jpg");
+        background-size: cover;
+        color: #1b2a4a;
+    }
+
+    .nav-icon4 {
+        background-image: url("../images/nav-icon4.jpg");
+        background-size: cover;
+        background-position: center;
+        color: #1b2a4a;
+    }
+
+    .nav-icon5 {
+        background-image: url("../images/nav-icon5.jpg");
+        background-size: cover;
+        color: #1b2a4a;
+    }
+
     .nav-label {
-      font-size: 11px;
+        font-size: 11px;
     }
 
     /* 5. 特集バナー (高さ:約140px) */
     .banner {
-      width: 100%;
-      height: 140px;
-      background-color: #e0e6ed;
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: bold;
-      color: #444;
+        width: 100%;
+        height: 140px;
+        background-color: #e0e6ed;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        color: #444;
     }
 
     /* 6. 新着商品・カルーセル (カードサイズ: 140px × 220px) */
     .product-carousel {
-      display: flex;
-      gap: 12px;
-      overflow-x: auto;
-      scrollbar-width: none;
+        display: flex;
+        gap: 12px;
+        overflow-x: auto;
+        scrollbar-width: none;
     }
+
     .product-card {
-      flex: 0 0 140px;
-      height: 220px;
-      border: 1px solid #eee;
-      border-radius: 8px;
-      padding: 8px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      background-color: #fff;
+        flex: 0 0 140px;
+        height: 220px;
+        border: 1px solid #eee;
+        border-radius: 8px;
+        padding: 8px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        background-color: #fff;
     }
+
     .product-img {
-      width: 100%;
-      height: 100px;
-      background-color: #f9f9f9;
-      border-radius: 4px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 10px;
-      color: #999;
+        width: 100%;
+        height: 100px;
+        background-color: #f9f9f9;
+        border-radius: 4px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 10px;
+        color: #999;
     }
+
     .tag {
-      font-size: 9px;
-      background-color: #1b2a4a;
-      color: #fff;
-      padding: 2px 4px;
-      border-radius: 2px;
-      align-self: flex-start;
-      margin: 4px 0;
+        font-size: 9px;
+        background-color: #1b2a4a;
+        color: #fff;
+        padding: 2px 4px;
+        border-radius: 2px;
+        align-self: flex-start;
+        margin: 4px 0;
     }
+
     .product-name {
-      font-size: 11px;
-      font-weight: bold;
-      line-height: 1.3;
+        font-size: 11px;
+        font-weight: bold;
+        line-height: 1.3;
     }
+
     .product-price {
-      font-size: 13px;
-      color: #e60012;
-      font-weight: bold;
+        font-size: 13px;
+        color: #e60012;
+        font-weight: bold;
     }
 
     /* 10. フッター (高さ可变・アコーディオン想定) */
     .footer {
-      background-color: #1b2a4a;
-      color: #fff;
-      padding: 24px 16px;
-      margin-top: 16px;
+        background-color: #1b2a4a;
+        color: #fff;
+        padding: 24px 16px;
+        margin-top: 16px;
     }
+
     .footer-item {
-      padding: 12px 0;
-      border-bottom: 1px solid rgba(255,255,255,0.1);
-      font-size: 13px;
-      display: flex;
-      justify-content: space-between;
+        padding: 12px 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        font-size: 13px;
+        display: flex;
+        justify-content: space-between;
     }
+
     .copyright {
-      text-align: center;
-      font-size: 10px;
-      color: #888;
-      margin-top: 24px;
+        text-align: center;
+        font-size: 10px;
+        color: #888;
+        margin-top: 24px;
     }
 
     /* 11. ボトムナビ (高さ:60px・最下部固定) */
     .bottom-nav {
-      position: fixed;
-      bottom: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 100%;
-      max-width: 430px;
-      height: 60px;
-      background-color: #fff;
-      border-top: 1px solid #ddd;
-      display: flex;
-      justify-content: space-around;
-      align-items: center;
-      z-index: 1000;
+        position: fixed;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100%;
+        max-width: 430px;
+        height: 60px;
+        background-color: #fff;
+        border-top: 1px solid #ddd;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        z-index: 1000;
     }
+
     .bottom-nav-item {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      font-size: 10px;
-      color: #555;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        font-size: 10px;
+        color: #555;
     }
+
     .bottom-nav-icon {
-      width: 24px;
-      height: 24px;
-      background-color: #ddd;
-      border-radius: 4px;
-      margin-bottom: 2px;
+        width: 24px;
+        height: 24px;
+        background-color: #ddd;
+        border-radius: 4px;
+        margin-bottom: 2px;
     }
