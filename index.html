@@ -151,5 +151,30 @@
       </div>
     </div>
   </div>
-</div></body>
+</div>
+<!-- 20260912 カートアイコン機能追加 -->
+<!-- カートドロワー（サイドバー） -->
+<div id="cart-overlay" class="cart-overlay"></div>
+
+<div id="cart-drawer" class="cart-drawer">
+  <div class="cart-header">
+    <h3>ショッピングカート (<span id="cart-count">0</span>)</h3>
+    <button id="close-cart-btn" class="close-btn">&times;</button>
+  </div>
+
+  <!-- カート内商品リストエリア -->
+  <div id="cart-items" class="cart-items">
+    <p class="empty-msg">カートに商品が入っていません。</p>
+  </div>
+
+  <!-- フッター：合計金額＆購入手続きボタン -->
+  <div class="cart-footer">
+    <div class="cart-total-row">
+      <span>小計（税込）</span>
+      <span id="cart-total-price">¥0</span>
+    </div>
+    <button id="checkout-btn" class="checkout-btn" disabled>ご購入手続きへ進む</button>
+  </div>
+</div>
+</body>
 </html>

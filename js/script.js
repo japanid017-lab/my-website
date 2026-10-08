@@ -238,3 +238,138 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
 });
+
+// 20260912　カートアイコン機能追加
+document.addEventListener('DOMContentLoaded', () => {
+
+  // カートデータ（状態保持用）
+  let cart = [];
+
+  // DOM要素
+  const cartDrawer = document.getElementById('cart-drawer');
+  const cartOverlay = document.getElementById('cart-overlay');
+  const closeCartBtn = document.getElementById('close-cart-btn');
+  const cartItemsContainer = document.getElementById('cart-items');
+  const cartCountEl = document.getElementById('cart-count');
+  const cartTotalPriceEl = document.getElementById('cart-total-price');
+  const checkoutBtn = document.getElementById('checkout-btn');
+
+  // ヘッダーやボトムナビのカートボタンを取得
+  const cartTriggers = document.querySelectorAll('.icon-btn, .bottom-nav-item');
+
+  // カート開閉制御
+  function openCart() {
+    cartDrawer.classList.add('active');
+    cartOverlay.classList.add('active');
+  }
+
+  function closeCart() {
+    cartDrawer.classList.remove('active');
+    cartOverlay.classList.remove('active');
+  }
+
+  // トリガーボタンのクリックイベント
+  cartTriggers.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      if (btn.textContent.includes('カート')) {
+        e.preventDefault();
+        openCart();
+      }
+    });
+  });
+
+  closeCartBtn.addEventListener('click', closeCart);
+  cartOverlay.addEventListener('click', closeCart);
+
+  // カート描画更新処理
+  function updateCartUI() {
+    // 1. カート数のカウント更新
+    const totalQty = cart.reduce((sum, item) => sum + item.quantity, 0);
+    cartCountEl.textContent = totalQty;
+
+    // ヘッダーアイコンのバッジ更新（あれば）
+    let badge = document.querySelector('.cart-badge');
+    if (badge) {
+      badge.textContent = totalQty;
+      badge.style.display = totalQty > 0 ? 'inline-block' : 'none';
+    }
+
+    // 2. カート内リストの描画
+    if (cart.length === 0) {
+      cartItemsContainer.innerHTML = '<p class="empty-msg">カートに商品が入っていません。</p>';
+      checkoutBtn.disabled = true;
+      cartTotalPriceEl.textContent = '¥0';
+      return;
+    }
+
+    checkoutBtn.disabled = false;
+    cartItemsContainer.innerHTML = '';
+
+    let totalPrice = 0;
+
+    cart.forEach(item => {
+      const itemTotal = item.price * item.quantity;
+      totalPrice += itemTotal;
+
+      const itemEl = document.createElement('div');
+      itemEl.className = 'cart-item';
+      itemEl.innerHTML = `
+        <div class="cart-item-info">
+          <div class="cart-item-title">${item.name}</div>
+          <div class="cart-item-price">¥${item.price.toLocaleString()}</div>
+          <div class="quantity-controls">
+            <button class="qty-btn minus-btn" data-id="${item.id}">-</button>
+            <span>${item.quantity}</span>
+            <button class="qty-btn plus-btn" data-id="${item.id}">+</button>
+            <button class="remove-btn" data-id="${item.id}">削除</button>
+          </div>
+        </div>
+      `;
+      cartItemsContainer.appendChild(itemEl);
+    });
+
+    // 3. 合計金額の更新
+    cartTotalPriceEl.textContent = `¥${totalPrice.toLocaleString()}`;
+  }
+
+  // 商品をカートに追加する関数（商品カードの「カートに追加」ボタンから呼び出し可能）
+  window.addToCart = function(product) {
+    const existingItem = cart.find(item => item.id === product.id);
+    if (existingItem) {
+      existingItem.quantity += 1;
+    } else {
+      cart.push({ ...product, quantity: 1 });
+    }
+    updateCartUI();
+    openCart(); // 追加したらドロワーを開く
+  };
+
+  // カート内での操作（＋、ー、削除ボタンのイベント移譲）
+  cartItemsContainer.addEventListener('click', (e) => {
+    const id = e.target.dataset.id;
+    if (!id) return;
+
+    const item = cart.find(i => i.id === id);
+
+    if (e.target.classList.contains('plus-btn')) {
+      item.quantity += 1;
+    } else if (e.target.classList.contains('minus-btn')) {
+      if (item.quantity > 1) {
+        item.quantity -= 1;
+      } else {
+        cart = cart.filter(i => i.id !== id);
+      }
+    } else if (e.target.classList.contains('remove-btn')) {
+      cart = cart.filter(i => i.id !== id);
+    }
+
+    updateCartUI();
+  });
+
+  // レジ進むボタン
+  checkoutBtn.addEventListener('click', () => {
+    alert('購入手続き画面へ遷移します');
+    // window.location.href = '/checkout';
+  });
+
+});
